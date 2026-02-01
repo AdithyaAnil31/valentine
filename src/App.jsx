@@ -8,7 +8,10 @@ export default function App() {
 
   // --- CONFIGURATION ---
   const myPhoneNumber = "919744225110"; 
-  const spotifyEmbedUrl = "https://open.spotify.com/embed/track/5lKE040hUfDAKOR8HLG92p?utm_source=generator&theme=0";
+  // Replace this with your actual Spotify Embed URL
+  const spotifyEmbedUrl = "https://open.spotify.com/embed/track/YOUR_TRACK_ID";
+  // Replace this with your copied GitHub Release Link
+  const videoReleaseUrl = "https://github.com/AdithyaAnil31/valentine/releases/download/v1.0.0/video.mp4";
   // ---------------------
 
   const handleNoClick = () => {
@@ -86,7 +89,7 @@ export default function App() {
               </div>
             </div>
             <h2 className="text-2xl font-bold text-slate-800">A gift for your ears...</h2>
-            <p className="text-slate-600 italic text-sm">"Jeena Jeena — a vibe that reminds me of us."</p>
+            <p className="text-slate-600 italic text-sm">"A vibe that reminds me of us."</p>
             
             <div className="w-full">
               <iframe 
@@ -115,7 +118,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Stage 3: The Video Surprise */}
+        {/* Stage 3: The Video Surprise (Direct Release Link) */}
         {stage === 3 && (
           <div className="space-y-6 animate-in fade-in zoom-in duration-700">
             <div className="flex justify-center">
@@ -129,15 +132,17 @@ export default function App() {
               <video 
                 controls 
                 autoPlay 
-                playsInline // Important for mobile browsers
+                muted
+                playsInline
+                crossOrigin="anonymous"
                 className="w-full h-auto"
                 style={{ maxHeight: '300px' }}
               >
-                {/* Replace the URL below with the link you copied from Step 2 */}
-                <source src="https://github.com/AdithyaAnil31/valentine/releases/download/v1.0.0/video.mp4" type="video/mp4" />
+                <source src={videoReleaseUrl} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
+            <p className="text-xs text-slate-400">Tap play to watch! (Ensure sound is on)</p>
 
             <button
               onClick={() => setStage(4)}
@@ -155,7 +160,7 @@ export default function App() {
             <div className="flex justify-center">
               <Heart className="text-red-500 animate-pulse" size={50} fill="currentColor" />
             </div>
-            <h2 className="text-2xl font-bold text-slate-800 leading-tight">"To the one who has my heart..."</h2>
+            <h2 className="text-2xl font-bold text-slate-800 leading-tight">To the one who has my heart...</h2>
             
             <div className="text-left space-y-6 overflow-y-auto max-h-60 pr-2 mb-6 custom-scrollbar">
               <div className="border-l-4 border-pink-200 pl-4 py-1">
