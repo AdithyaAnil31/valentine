@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, Music, MessageCircle, Camera, Star, ArrowRight, Volume2, MapPin, Coffee, Utensils, Sparkles, Send, Video } from 'lucide-react';
+import { Heart, Music, MessageCircle, Camera, Star, ArrowRight, Volume2, MapPin, Coffee, Utensils, Sparkles, Send } from 'lucide-react';
 
 export default function App() {
   const [stage, setStage] = useState(1);
@@ -7,11 +7,10 @@ export default function App() {
   const [selectedDate, setSelectedDate] = useState(null);
 
   // --- CONFIGURATION ---
+  // Replace with your phone number (including country code, no spaces or +)
+  // Example: "919876543210"
   const myPhoneNumber = "919744225110"; 
-  // Replace this with your actual Spotify Embed URL
-  const spotifyEmbedUrl = "https://open.spotify.com/embed/track/YOUR_TRACK_ID";
-  // Replace this with your copied GitHub Release Link
-  const videoReleaseUrl = "https://github.com/AdithyaAnil31/valentine/releases/download/v1.0.0/video.mp4";
+  const spotifyEmbedUrl = "https://open.spotify.com/embed/track/5lKE040hUfDAKOR8HLG92p?utm_source=generator&theme=0";
   // ---------------------
 
   const handleNoClick = () => {
@@ -80,22 +79,26 @@ export default function App() {
           </div>
         )}
 
-        {/* Stage 2: Music Player */}
-        {stage === 2 && (
-          <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-700">
-            <div className="flex justify-center">
-              <div className="bg-pink-100 p-4 rounded-full">
-                <Music className="text-pink-500 animate-bounce" size={40} />
+        {/* Persistent Music Player */}
+        {stage >= 2 && (
+          <div className={`transition-all duration-700 ${stage === 2 ? 'mb-6' : 'mt-auto pt-4 border-t border-pink-50'}`}>
+            {stage === 2 && (
+              <div className="space-y-4 animate-in slide-in-from-bottom-4">
+                <div className="flex justify-center">
+                  <div className="bg-pink-100 p-4 rounded-full">
+                    <Music className="text-pink-500 animate-bounce" size={40} />
+                  </div>
+                </div>
+                <h2 className="text-2xl font-bold text-slate-800">A gift for your ears...</h2>
+                <p className="text-slate-600 italic text-sm">"Jeena Jeena — a vibe that reminds me of us."</p>
               </div>
-            </div>
-            <h2 className="text-2xl font-bold text-slate-800">A gift for your ears...</h2>
-            <p className="text-slate-600 italic text-sm">"A vibe that reminds me of us."</p>
+            )}
             
-            <div className="w-full">
+            <div className={`w-full transition-all duration-500 ${stage > 2 ? 'opacity-80 scale-95' : ''}`}>
               <iframe 
                 src={spotifyEmbedUrl}
                 width="100%" 
-                height="152" 
+                height={stage === 2 ? "152" : "80"} 
                 frameBorder="0" 
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                 loading="lazy"
@@ -103,64 +106,30 @@ export default function App() {
               ></iframe>
             </div>
 
-            <div className="mt-6 space-y-4">
-              <p className="text-xs text-slate-400">
-                Tap play on the Spotify widget, then click below to continue.
-              </p>
-              <button
-                onClick={() => setStage(3)}
-                className="w-full flex items-center justify-center gap-2 bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-xl group"
-              >
-                Next Surprise
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Stage 3: The Video Surprise (Direct Release Link) */}
-        {stage === 3 && (
-          <div className="space-y-6 animate-in fade-in zoom-in duration-700">
-            <div className="flex justify-center">
-              <div className="bg-purple-100 p-4 rounded-full">
-                <Video className="text-purple-500 animate-pulse" size={40} />
+            {stage === 2 && (
+              <div className="mt-6 space-y-4">
+                <p className="text-xs text-slate-400">
+                  Tap play on the Spotify widget, then click below to continue.
+                </p>
+                <button
+                  onClick={() => setStage(3)}
+                  className="w-full flex items-center justify-center gap-2 bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-xl group"
+                >
+                  Unlock the next surprise
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </button>
               </div>
-            </div>
-            <h2 className="text-2xl font-bold text-slate-800">A special moment...</h2>
-            
-            <div className="w-full rounded-2xl overflow-hidden shadow-xl border-2 border-purple-100 bg-black">
-              <video 
-                controls 
-                autoPlay 
-                muted
-                playsInline
-                crossOrigin="anonymous"
-                className="w-full h-auto"
-                style={{ maxHeight: '300px' }}
-              >
-                <source src={videoReleaseUrl} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <p className="text-xs text-slate-400">Tap play to watch! (Ensure sound is on)</p>
-
-            <button
-              onClick={() => setStage(4)}
-              className="w-full flex items-center justify-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-xl group"
-            >
-              Continue to my message
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+            )}
           </div>
         )}
 
-        {/* Stage 4: Memories */}
-        {stage === 4 && (
+        {/* Stage 3: Final Message / Memories */}
+        {stage === 3 && (
           <div className="space-y-6 animate-in fade-in duration-1000">
             <div className="flex justify-center">
               <Heart className="text-red-500 animate-pulse" size={50} fill="currentColor" />
             </div>
-            <h2 className="text-2xl font-bold text-slate-800 leading-tight">To the one who has my heart...</h2>
+            <h2 className="text-2xl font-bold text-slate-800 leading-tight">"To the one who has my heart..."</h2>
             
             <div className="text-left space-y-6 overflow-y-auto max-h-60 pr-2 mb-6 custom-scrollbar">
               <div className="border-l-4 border-pink-200 pl-4 py-1">
@@ -189,7 +158,7 @@ export default function App() {
             </div>
 
             <button
-              onClick={() => setStage(5)}
+              onClick={() => setStage(4)}
               className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-lg flex items-center justify-center gap-2 group"
             >
               Let's plan our date
@@ -198,8 +167,8 @@ export default function App() {
           </div>
         )}
 
-        {/* Stage 5: Date Selector */}
-        {stage === 5 && (
+        {/* Stage 4: Minimalist Date Selector */}
+        {stage === 4 && (
           <div className="space-y-6 animate-in fade-in zoom-in duration-700">
             <div className="text-left">
               <h2 className="text-2xl font-bold text-slate-800 mb-2 text-center">Our Next Adventure</h2>
@@ -233,16 +202,20 @@ export default function App() {
               <div className="animate-in fade-in slide-in-from-top-4 duration-500 pt-2">
                 <button
                   onClick={handleConfirmDate}
-                  className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-xl flex items-center justify-center gap-3"
+                  className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-xl flex items-center justify-center gap-3 animate-bounce-short"
                 >
                   Confirm & Tell Me! <Send size={18} />
                 </button>
+                <p className="text-[10px] text-slate-400 mt-4 text-center">
+                  Clicking will open WhatsApp to send me your choice!
+                </p>
               </div>
             )}
           </div>
         )}
 
-        {stage >= 4 && (
+        {/* Footer Signature */}
+        {stage >= 3 && (
           <p className="text-[10px] text-slate-400 mt-6 opacity-50">Created with ❤️ just for you</p>
         )}
 
