@@ -185,7 +185,7 @@ export default function App() {
                 style={{ maxHeight: '300px' }}
               >
                 {/* process.env.PUBLIC_URL handles the correct path on GitHub Pages */}
-                <source src={process.env.PUBLIC_URL + "/video.MP4"} type="video/mp4" />
+                <source src={process.env.PUBLIC_URL + "/video.mp4"} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
