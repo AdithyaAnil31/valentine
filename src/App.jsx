@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, Music, MessageCircle, Camera, Star, ArrowRight, Volume2, MapPin, Coffee, Utensils, Sparkles, Send, Video } from 'lucide-react';
+import { Heart, Music, Camera, Star, ArrowRight, Volume2, MapPin, Coffee, Utensils, Sparkles, Send, Video } from 'lucide-react';
 
 export default function App() {
   const [stage, setStage] = useState(1);
@@ -9,10 +9,6 @@ export default function App() {
   // --- CONFIGURATION ---
   const myPhoneNumber = "919744225110"; 
   const spotifyEmbedUrl = "https://open.spotify.com/embed/track/5lKE040hUfDAKOR8HLG92p?utm_source=generator&theme=0";
-  
-  // FIXED: Using a CORS proxy to allow the video to stream from GitHub Releases
-  const rawVideoUrl = "https://github.com/AdithyaAnil31/valentine/releases/download/v1.0.0/video.mp4";
-  const videoReleaseUrl = `https://corsproxy.io/?${encodeURIComponent(rawVideoUrl)}`;
   // ---------------------
 
   const handleNoClick = () => {
@@ -81,7 +77,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Stage 2: Persistent Music Player (Kept exactly as it was) */}
+        {/* Stage 2: Music Player */}
         {stage >= 2 && (
           <div className={`transition-all duration-700 ${stage === 2 ? 'mb-6' : 'mt-auto pt-4 border-t border-pink-50'}`}>
             {stage === 2 && (
@@ -125,7 +121,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Stage 3: The Video Surprise (INSERTED HERE) */}
+        {/* Stage 3: The Video Surprise (Local File) */}
         {stage === 3 && (
           <div className="space-y-6 animate-in fade-in zoom-in duration-700">
             <div className="flex justify-center">
@@ -139,17 +135,18 @@ export default function App() {
               <video 
                 controls 
                 autoPlay 
-                muted
                 playsInline
-                crossOrigin="anonymous"
                 className="w-full h-auto"
                 style={{ maxHeight: '300px' }}
               >
-                <source src={videoReleaseUrl} type="video/mp4" />
+                {/* IMPORTANT: This assumes 'video.mp4' is in your 'public' folder. 
+                   process.env.PUBLIC_URL handles the path correctly on GitHub Pages.
+                */}
+                <source src={process.env.PUBLIC_URL + "/video.mp4"} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
-            <p className="text-xs text-slate-400">Tap play to watch! (Ensure sound is on)</p>
+            <p className="text-xs text-slate-400">Tap to play!</p>
 
             <button
               onClick={() => setStage(4)}
@@ -161,7 +158,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Stage 4: Memories (Renumbered from 3) */}
+        {/* Stage 4: Memories */}
         {stage === 4 && (
           <div className="space-y-6 animate-in fade-in duration-1000">
             <div className="flex justify-center">
@@ -205,7 +202,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Stage 5: Minimalist Date Selector (Renumbered from 4) */}
+        {/* Stage 5: Date Selector */}
         {stage === 5 && (
           <div className="space-y-6 animate-in fade-in zoom-in duration-700">
             <div className="text-left">
