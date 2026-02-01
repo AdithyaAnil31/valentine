@@ -77,7 +77,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Stage 2: Music Player */}
+        {/* Stage 2: Persistent Music Player */}
         {stage >= 2 && (
           <div className={`transition-all duration-700 ${stage === 2 ? 'mb-6' : 'mt-auto pt-4 border-t border-pink-50'}`}>
             {stage === 2 && (
@@ -121,45 +121,8 @@ export default function App() {
           </div>
         )}
 
-        {/* Stage 3: The Video Surprise (Local File) */}
+        {/* Stage 3: Memories (Moved UP) */}
         {stage === 3 && (
-          <div className="space-y-6 animate-in fade-in zoom-in duration-700">
-            <div className="flex justify-center">
-              <div className="bg-purple-100 p-4 rounded-full">
-                <Video className="text-purple-500 animate-pulse" size={40} />
-              </div>
-            </div>
-            <h2 className="text-2xl font-bold text-slate-800">A special moment...</h2>
-            
-            <div className="w-full rounded-2xl overflow-hidden shadow-xl border-2 border-purple-100 bg-black">
-              <video 
-                controls 
-                autoPlay 
-                playsInline
-                className="w-full h-auto"
-                style={{ maxHeight: '300px' }}
-              >
-                {/* IMPORTANT: This assumes 'video.mp4' is in your 'public' folder. 
-                   process.env.PUBLIC_URL handles the path correctly on GitHub Pages.
-                */}
-                <source src={process.env.PUBLIC_URL + "/video.mp4"} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <p className="text-xs text-slate-400">Tap to play!</p>
-
-            <button
-              onClick={() => setStage(4)}
-              className="w-full flex items-center justify-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-xl group"
-            >
-              Continue to my message
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        )}
-
-        {/* Stage 4: Memories */}
-        {stage === 4 && (
           <div className="space-y-6 animate-in fade-in duration-1000">
             <div className="flex justify-center">
               <Heart className="text-red-500 animate-pulse" size={50} fill="currentColor" />
@@ -193,11 +156,46 @@ export default function App() {
             </div>
 
             <button
-              onClick={() => setStage(5)}
+              onClick={() => setStage(4)}
               className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-lg flex items-center justify-center gap-2 group"
             >
+              I have one more surprise...
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        )}
+
+        {/* Stage 4: Video (Moved DOWN) */}
+        {stage === 4 && (
+          <div className="space-y-6 animate-in fade-in zoom-in duration-700">
+            <div className="flex justify-center">
+              <div className="bg-purple-100 p-4 rounded-full">
+                <Video className="text-purple-500 animate-pulse" size={40} />
+              </div>
+            </div>
+            <h2 className="text-2xl font-bold text-slate-800">A special moment...</h2>
+            
+            <div className="w-full rounded-2xl overflow-hidden shadow-xl border-2 border-purple-100 bg-black">
+              <video 
+                controls 
+                autoPlay 
+                playsInline
+                className="w-full h-auto"
+                style={{ maxHeight: '300px' }}
+              >
+                {/* process.env.PUBLIC_URL handles the correct path on GitHub Pages */}
+                <source src={process.env.PUBLIC_URL + "/video.mp4"} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p className="text-xs text-slate-400">Tap to play!</p>
+
+            <button
+              onClick={() => setStage(5)}
+              className="w-full flex items-center justify-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-xl group"
+            >
               Let's plan our date
-              <MapPin size={18} className="group-hover:animate-bounce" />
+              <MapPin size={20} className="group-hover:animate-bounce" />
             </button>
           </div>
         )}
