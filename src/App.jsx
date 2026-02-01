@@ -141,9 +141,9 @@ export default function App() {
               <div className="border-l-4 border-pink-200 pl-4 py-1">
                 <div className="flex items-center gap-2 mb-1">
                   <Volume2 size={16} className="text-pink-400" />
-                  <h3 className="font-bold text-slate-700">Our Shared Silence</h3>
+                  <h3 className="font-bold text-slate-700">Our Shared Time</h3>
                 </div>
-                <p className="text-sm text-slate-600">Listening to music while sitting next to you is my favorite therapy. It feels like home.</p>
+                <p className="text-sm text-slate-600">Listening to you while sitting next to you is my favorite therapy. It feels like home.</p>
               </div>
 
               <div className="border-l-4 border-pink-200 pl-4 py-1">
@@ -179,6 +179,7 @@ export default function App() {
               <video 
                 controls 
                 autoPlay 
+                muted
                 playsInline
                 className="w-full h-auto"
                 style={{ maxHeight: '300px' }}
